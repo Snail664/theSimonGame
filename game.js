@@ -42,7 +42,7 @@ function animate(buttoncolour) {
 
 // *** GAME START ***
 
-$(document).on("keypress", function () {
+$("h1").on("click", function () {
   startgame();
 });
 
@@ -55,19 +55,19 @@ function startgame() {
 }
 
 function turnStart(turn, list) {
-  turn = turn++;
-  $("h1").text("Level " + turn.toString());
+  var turnNumber = turn++;
+  $("h1").text("Level " + turnNumber.toString());
   // choose one buttonid and add to lizt
   var liztid = Math.floor(Math.random() * 4);
-  list.push(buttonids[liztid]);
+  var listOfButtons = list.push(buttonids[liztid]);
 
   //animate the buttons
-  for (button in list) {
+  for (button in listOfButtons) {
     window.setTimeout(animate(button), 500);
   }
 
   //pass arguments onto the next function
-  userPlays(turn, list);
+  userPlays(turnNumber, listOfButtons);
 }
 
 function userPlays(turn, list) {
@@ -99,11 +99,14 @@ function userPlays(turn, list) {
 
   if (userList === list) {
     turnStart(turn, list);
+  } else {
+    gameover();
   }
 }
 
-$("h1").text("Game over! Press any key to start again");
-
-$(document).on("keypress", function () {
-  startgame();
-});
+function gameover() {
+  $("h1").text("Game over! Press any key to start again");
+  $(document).on("keypress", function () {
+    startgame();
+  });
+}
