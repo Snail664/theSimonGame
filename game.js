@@ -14,7 +14,7 @@ var buttonids = ["#green", "#red", "#blue", "#yellow"];
 
 // *** For loop for animations ***
 
-for (id of buttonids) {
+for (const id of buttonids) {
   $(id).click(function () {
     animate(id);
   })
